@@ -214,14 +214,14 @@ function App() {
       <button  onClick={() => handleSubmit()}>Enviar</button>
 
 
-      { dividendosPagos? (
+      { dividendosPagos[contador]? (
         <div className="calculadora-resumo-card">
         <p>Total de dividendos Pagos: R$ {dividendosPagos[contador]}</p>
         <p>Ultimo dividendo pago: R$ {ultimoDividendoPago}</p>
         <p>Total de valorização: R$ {jurosPagos[contador]}</p>
         <p>Capital investido: R$ {valorInvestido[contador]}</p>
         <p>Valor acumulado: R$ {valorAcumulado[contador]}</p>
-      </div>) : null}
+      </div>) : console.log("Não aconteceu")}
       
     </div>
   );
