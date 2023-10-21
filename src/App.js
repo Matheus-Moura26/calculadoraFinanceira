@@ -216,12 +216,65 @@ function App() {
 
       { dividendosPagos[contador]? (
         <div className="calculadora-resumo-card">
-        <p>Total de dividendos Pagos: R$ {dividendosPagos[contador]}</p>
-        <p>Ultimo dividendo pago: R$ {ultimoDividendoPago}</p>
-        <p>Total de valorização: R$ {jurosPagos[contador]}</p>
-        <p>Capital investido: R$ {valorInvestido[contador]}</p>
-        <p>Valor acumulado: R$ {valorAcumulado[contador]}</p>
-      </div>) : console.log("Não aconteceu")}
+        <p>Total de dividendos Pagos: R$ {dividendosPagos[contador].toLocaleString('pt-BR', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}</p>
+        <p>Ultimo dividendo pago: R$ {ultimoDividendoPago.toLocaleString('pt-BR', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}</p>
+        <p>Total de valorização: R$ {jurosPagos[contador].toLocaleString('pt-BR', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}</p>
+        <p>Capital investido: R$ {valorInvestido[contador].toLocaleString('pt-BR', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}</p>
+        <p>Valor acumulado: R$ {valorAcumulado[contador].toLocaleString('pt-BR', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}</p>
+      </div>) : null}
+
+      {dividendosPagos[contador] ? (
+        <table>
+          <thead>
+            <tr>
+              <th>Mês</th>
+              <th>Valor Investido</th>
+              <th>Rentabilidade</th>
+              <th>Dividendos Totais</th>
+              <th>Valor acumulado</th>
+            </tr>
+          </thead>
+          <tbody>
+            {valorAcumulado.map((item, index) => (
+              <tr key={index}>
+                <td>{index + 1}</td>
+                <td>R$ {valorInvestido[index].toLocaleString('pt-BR', {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}</td>
+                <td>R$ {jurosPagos[index].toLocaleString('pt-BR', {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}</td>
+                <td>R$ {dividendosPagos[index].toLocaleString('pt-BR', {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}</td>
+                <td>R$ {valorAcumulado[index].toLocaleString('pt-BR', {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : null}
+
       
     </div>
   );
