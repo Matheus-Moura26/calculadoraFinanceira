@@ -161,7 +161,13 @@ function App() {
   }
 
 
-
+  //formatar números
+  function formatNumber(number) {
+    return number.toLocaleString('pt-BR', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  }
 
 
 
@@ -216,26 +222,11 @@ function App() {
 
       { dividendosPagos[contador]? (
         <div className="calculadora-resumo-card">
-        <p>Total de dividendos Pagos: R$ {dividendosPagos[contador].toLocaleString('pt-BR', {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        })}</p>
-        <p>Ultimo dividendo pago: R$ {ultimoDividendoPago.toLocaleString('pt-BR', {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        })}</p>
-        <p>Total de valorização: R$ {jurosPagos[contador].toLocaleString('pt-BR', {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        })}</p>
-        <p>Capital investido: R$ {valorInvestido[contador].toLocaleString('pt-BR', {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        })}</p>
-        <p>Valor acumulado: R$ {valorAcumulado[contador].toLocaleString('pt-BR', {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        })}</p>
+        <p>Total de dividendos Pagos: R$ {formatNumber(dividendosPagos[contador])}</p>
+        <p>Ultimo dividendo pago: R$ {formatNumber(ultimoDividendoPago)}</p>
+        <p>Total de valorização: R$ {formatNumber(jurosPagos[contador])}</p>
+        <p>Capital investido: R$ {formatNumber(valorInvestido[contador])}</p>
+        <p>Valor acumulado: R$ {formatNumber(valorAcumulado[contador])}</p>
       </div>) : null}
 
       {dividendosPagos[contador] ? (
@@ -253,22 +244,10 @@ function App() {
             {valorAcumulado.map((item, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
-                <td>R$ {valorInvestido[index].toLocaleString('pt-BR', {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                })}</td>
-                <td>R$ {jurosPagos[index].toLocaleString('pt-BR', {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                })}</td>
-                <td>R$ {dividendosPagos[index].toLocaleString('pt-BR', {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                })}</td>
-                <td>R$ {valorAcumulado[index].toLocaleString('pt-BR', {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                })}</td>
+                <td>R$ {formatNumber(valorInvestido[contador])}</td>
+                <td>R$ {formatNumber(jurosPagos[contador])}</td>
+                <td>R$ {formatNumber(dividendosPagos[contador])}</td>
+                <td>R$ {formatNumber(valorAcumulado[contador])}</td>
               </tr>
             ))}
           </tbody>
