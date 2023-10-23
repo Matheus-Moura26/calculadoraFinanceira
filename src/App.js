@@ -241,7 +241,7 @@ function App() {
       {dividendosPagos[contador] ? (
         <table>
           <thead>
-            <tr>
+            <tr> 
               <th>Mês</th>
               <th>Valor Investido</th>
               <th>Rentabilidade</th>
