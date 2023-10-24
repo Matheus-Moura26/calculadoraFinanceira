@@ -9,7 +9,7 @@ function App() {
   const [valorInvestido, setValorInvestido] = useState([])
   const [valorAcumulado, setValorAcumulado] = useState([])
   const [contador, setContador] = useState(-1)
-  const [ultimoDividendoPago, setUltimoDividendoPago] = useState(0)
+  const [ultimoDividendoPago, setUltimoDividendoPago] = useState([])
 
   function Calcular(PV, PMT, D, N, I, REINVESTEDIVIDENDOS,PERIODODIVIDENDOS){
     setDividendosPagos([])
@@ -19,6 +19,7 @@ function App() {
     setContador(N-1)
 
     let dividendosPagosArray = [];
+    let ultimoDividendoPagoArray = [];
     let jurosPagosArray = [];
     let valorInvestidoArray = [];
     let valorAcumuladoArray = [];
@@ -57,15 +58,16 @@ function App() {
           } else {
             VA = VA * (I / 100) + VA + PMT;
           }
-      
+          
           dividendosPagosArray.push(DVP);
+          ultimoDividendoPagoArray.push(UDP);
           jurosPagosArray.push(JP);
           valorInvestidoArray.push(VI);
           valorAcumuladoArray.push(VA);
         }
       
         setDividendosPagos(dividendosPagosArray);
-        setUltimoDividendoPago(UDP);
+        setUltimoDividendoPago(ultimoDividendoPagoArray);
         setJurosPagos(jurosPagosArray);
         setValorInvestido(valorInvestidoArray);
         setValorAcumulado(valorAcumuladoArray);
@@ -76,7 +78,7 @@ function App() {
           ${dividendosPagosArray}
           
           ultimo dividendo pago:
-          ${UDP}
+          ${ultimoDividendoPagoArray}
       
           juros pagos:
           ${jurosPagosArray}
@@ -97,12 +99,13 @@ function App() {
           VA = (VA*I/100)+VA+PMT
             
           dividendosPagosArray.push(DVP);
+          ultimoDividendoPagoArray.push(UDP);
           jurosPagosArray.push(JP);
           valorInvestidoArray.push(VI);
           valorAcumuladoArray.push(VA);
 
           setDividendosPagos(dividendosPagosArray);
-          setUltimoDividendoPago(UDP);
+          setUltimoDividendoPago(ultimoDividendoPagoArray);
           setJurosPagos(jurosPagosArray);
           setValorInvestido(valorInvestidoArray);
           setValorAcumulado(valorAcumuladoArray);
@@ -223,7 +226,7 @@ function App() {
       { dividendosPagos[contador]? (
         <div className="calculadora-resumo-card">
         <p>Total de dividendos Pagos: R$ {formatNumber(dividendosPagos[contador])}</p>
-        <p>Ultimo dividendo pago: R$ {formatNumber(ultimoDividendoPago)}</p>
+        <p>Ultimo dividendo pago: R$ {formatNumber(ultimoDividendoPago[contador])}</p>
         <p>Total de valorização: R$ {formatNumber(jurosPagos[contador])}</p>
         <p>Capital investido: R$ {formatNumber(valorInvestido[contador])}</p>
         <p>Valor acumulado: R$ {formatNumber(valorAcumulado[contador])}</p>
@@ -237,6 +240,7 @@ function App() {
               <th>Valor Investido</th>
               <th>Rentabilidade</th>
               <th>Dividendos Totais</th>
+              <th>Dividendo do Período</th>
               <th>Valor acumulado</th>
             </tr>
           </thead>
@@ -244,10 +248,11 @@ function App() {
             {valorAcumulado.map((item, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
-                <td>R$ {formatNumber(valorInvestido[contador])}</td>
-                <td>R$ {formatNumber(jurosPagos[contador])}</td>
-                <td>R$ {formatNumber(dividendosPagos[contador])}</td>
-                <td>R$ {formatNumber(valorAcumulado[contador])}</td>
+                <td>R$ {formatNumber(valorInvestido[index])}</td>
+                <td>R$ {formatNumber(jurosPagos[index])}</td>
+                <td>R$ {formatNumber(dividendosPagos[index])}</td>
+                <td>R$ {formatNumber(ultimoDividendoPago[index])}</td>
+                <td>R$ {formatNumber(valorAcumulado[index])}</td>
               </tr>
             ))}
           </tbody>
