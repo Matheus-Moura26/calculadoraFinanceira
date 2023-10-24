@@ -1,4 +1,6 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
+import { Chart } from "react-google-charts";
+
 import "./css/app.css"
   
 
@@ -162,8 +164,7 @@ function App() {
       }
     }
   }
-
-
+  ////////////////////////////////
   //formatar números
   function formatNumber(number) {
     return number.toLocaleString('pt-BR', {
@@ -171,9 +172,26 @@ function App() {
       maximumFractionDigits: 2,
     });
   }
+  ///////////////////////////////
+  //VARIAVEIS DOS GRAFICOS
+  const [chartData, setChartData] = useState([])
 
-
-
+  useEffect(() => {
+    const chartDataArray = valorAcumulado.map((elemento, index) => [
+      index + 1,
+      valorInvestido[index],
+      elemento
+    ]);
+  
+    // Criar cabeçalho neste array
+    chartDataArray.unshift(["Período", "Valor Total Investido", "Valor Acumulado"]);
+  
+    // Dados vão para o estado do gráfico
+    setChartData(chartDataArray);
+    console.log(chartData);
+  }, [valorAcumulado]);
+  
+  
 
 
 
@@ -189,13 +207,14 @@ function App() {
   const [reinvesteDividendos, setReinvesteDividendos] = useState(0);
 
   function handleSubmit(){
-    
     Calcular(valoreInicial, aporte, dividendos, tempo, rentabilidade, reinvesteDividendos, periodoDividendos )
   }
   
   
   return (
     <div className="calculadora-body">
+      <h1>Calculadora de rendimentos</h1>
+
       <label className="calculadora-form-label">Valor Inicial</label>
       <input className="calculadora-form-input" type="number"  onChange={ (e) => setValorInicial(parseFloat(e.target.value))}/>
       <label className="calculadora-form-label">Aporte</label>
@@ -231,6 +250,28 @@ function App() {
         <p>Capital investido: R$ {formatNumber(valorInvestido[contador])}</p>
         <p>Valor acumulado: R$ {formatNumber(valorAcumulado[contador])}</p>
       </div>) : null}
+
+
+      { dividendosPagos[contador]? (
+        <Chart
+        chartType="LineChart"
+        data={chartData}
+        width="100.00%"
+        height="100vh"
+        options={{
+          title: "Valor totais investidos x Valores acumulados no período",
+          curveType: "function",
+          series: {
+            1: {color: "#00178a"},
+            2: {color: "#6f87ff"}
+          },
+          legend: { position: "bottom" },
+        }}
+      />
+      ) : null}
+
+
+      
 
       {dividendosPagos[contador] ? (
         <table>
