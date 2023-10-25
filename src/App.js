@@ -212,96 +212,129 @@ function App() {
   
   
   return (
-    <div className="calculadora-body">
-      <h1>Calculadora de rendimentos</h1>
+    <>
+      <h1 id="title">Calculadora de rendimentos</h1>
+      <div className="calculadora-body">
+      
+        <div className="calculadora-form-card">
+          <div className="calculadora-form-card-content">
+            <label className="calculadora-form-label">Investimento Inicial</label>
+            <input className="calculadora-form-input" type="number"  onChange={ (e) => setValorInicial(parseFloat(e.target.value))}/>
+          </div>
 
-      <label className="calculadora-form-label">Valor Inicial</label>
-      <input className="calculadora-form-input" type="number"  onChange={ (e) => setValorInicial(parseFloat(e.target.value))}/>
-      <label className="calculadora-form-label">Aporte</label>
-      <input className="calculadora-form-input" type="number" onChange={ (e) => setAporte(parseFloat(e.target.value)) }/>
-      <label className="calculadora-form-label">Tempo</label>
-      <input className="calculadora-form-input" type="number" onChange={ (e) => setTempo(parseInt(e.target.value)) } />
-      <label className="calculadora-form-label">Rentabilidade</label>
-      <input className="calculadora-form-input"  type="number" onChange={ (e) => setRentabilidade(parseFloat(e.target.value)) } />
-      <label className="calculadora-form-label">Dividendos</label>
-      <input className="calculadora-form-input" type="number" onChange={ (e) => setDividendos(parseFloat(e.target.value)) } />
-      <label className="calculadora-form-label">Periodo dos dividendos</label>
-      <select className="calculadora-form-select" type="number"  onChange={ (e) => setPeriodoDividendos(parseInt(e.target.value))}>
-        <option className="calculadora-form-options" value={0}>nenhum</option>
-        <option className="calculadora-form-options" value={1}>mensal</option>
-        <option className="calculadora-form-options" value={2}>bimestral</option>
-        <option className="calculadora-form-options" value={3}>trimestral</option>
-        <option className="calculadora-form-options" value={6}>semestral</option>
-        <option className="calculadora-form-options" value={12}>anual</option>
-      </select>
-      <label className="calculadora-form-label-select">Reinveste os dividendos?</label>
-      <select className="calculadora-form-select" type="boolean" onChange={ (e) => setReinvesteDividendos(parseInt(e.target.value)) }>
-        <option className="calculadora-form-options" value={0}>Não</option>
-        <option className="calculadora-form-options" value={1}>Sim</option>
-      </select>
-      <button  onClick={() => handleSubmit()}>Enviar</button>
+          <div className="calculadora-form-card-content">
+            <label className="calculadora-form-label">investimento mensal</label>
+            <input className="calculadora-form-input" type="number" onChange={ (e) => setAporte(parseFloat(e.target.value)) }/>
+          </div>      
+        </div>
 
+        <div className="calculadora-form-card">
+          <div className="calculadora-form-card-content">
+            <label className="calculadora-form-label">Prazo</label>
+            <input className="calculadora-form-input" type="number" onChange={ (e) => setTempo(parseInt(e.target.value)) } />
+          </div>
 
-      { dividendosPagos[contador]? (
-        <div className="calculadora-resumo-card">
-        <p>Total de dividendos Pagos: R$ {formatNumber(dividendosPagos[contador])}</p>
-        <p>Ultimo dividendo pago: R$ {formatNumber(ultimoDividendoPago[contador])}</p>
-        <p>Total de valorização: R$ {formatNumber(jurosPagos[contador])}</p>
-        <p>Capital investido: R$ {formatNumber(valorInvestido[contador])}</p>
-        <p>Valor acumulado: R$ {formatNumber(valorAcumulado[contador])}</p>
-      </div>) : null}
+          <div className="calculadora-form-card-content">
+            <label className="calculadora-form-label">Rentabilidade</label>
+            <input className="calculadora-form-input"  type="number" onChange={ (e) => setRentabilidade(parseFloat(e.target.value)) } />
+          </div>
+        </div>
 
+        <div className="calculadora-form-card">
+          <div className="calculadora-form-card-content">
+            <label className="calculadora-form-label">Dividendos</label>
+            <input className="calculadora-form-input" type="number" onChange={ (e) => setDividendos(parseFloat(e.target.value)) } />
+          </div>
 
-      { dividendosPagos[contador]? (
-        <Chart
-        chartType="LineChart"
-        data={chartData}
-        width="100.00%"
-        height="100vh"
-        options={{
-          title: "Valor totais investidos x Valores acumulados no período",
-          curveType: "function",
-          series: {
-            1: {color: "#00178a"},
-            2: {color: "#6f87ff"}
-          },
-          legend: { position: "bottom" },
-        }}
-      />
-      ) : null}
+          <div className="calculadora-form-card-content">
+            <label className="calculadora-form-label">Periodo dos dividendos</label>
+            <select className="calculadora-form-select" type="number"  onChange={ (e) => setPeriodoDividendos(parseInt(e.target.value))}>
+              <option className="calculadora-form-options" value={0}>nenhum</option>
+              <option className="calculadora-form-options" value={1}>mensal</option>
+              <option className="calculadora-form-options" value={2}>bimestral</option>
+              <option className="calculadora-form-options" value={3}>trimestral</option>
+              <option className="calculadora-form-options" value={6}>semestral</option>
+              <option className="calculadora-form-options" value={12}>anual</option>
+            </select>
+          </div>
 
-
+          <div className="calculadora-form-card-content">
+            <label className="calculadora-form-label-select">Reinveste os dividendos?</label>
+            <select className="calculadora-form-select" type="boolean" onChange={ (e) => setReinvesteDividendos(parseInt(e.target.value)) }>
+              <option className="calculadora-form-options" value={0}>Não</option>
+              <option className="calculadora-form-options" value={1}>Sim</option>
+            </select>
+          </div>
+          
+        </div>
+      </div>
+      <div className="calculadora-form-card-button">
+        <button className="calculadora-form-button"  onClick={() => handleSubmit()}>Enviar</button>
+      </div>
       
 
-      {dividendosPagos[contador] ? (
-        <table>
-          <thead>
-            <tr> 
-              <th>Mês</th>
-              <th>Valor Investido</th>
-              <th>Rentabilidade</th>
-              <th>Dividendos Totais</th>
-              <th>Dividendo do Período</th>
-              <th>Valor acumulado</th>
-            </tr>
-          </thead>
-          <tbody>
-            {valorAcumulado.map((item, index) => (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td>R$ {formatNumber(valorInvestido[index])}</td>
-                <td>R$ {formatNumber(jurosPagos[index])}</td>
-                <td>R$ {formatNumber(dividendosPagos[index])}</td>
-                <td>R$ {formatNumber(ultimoDividendoPago[index])}</td>
-                <td>R$ {formatNumber(valorAcumulado[index])}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : null}
+        { dividendosPagos[contador]? (
+          <div className="calculadora-resumo-card">
+          <p>Total de dividendos Pagos: R$ {formatNumber(dividendosPagos[contador])}</p>
+          <p>Ultimo dividendo pago: R$ {formatNumber(ultimoDividendoPago[contador])}</p>
+          <p>Total de valorização: R$ {formatNumber(jurosPagos[contador])}</p>
+          <p>Capital investido: R$ {formatNumber(valorInvestido[contador])}</p>
+          <p>Valor acumulado: R$ {formatNumber(valorAcumulado[contador])}</p>
+        </div>) : null}
 
-      
-    </div>
+
+        { dividendosPagos[contador]? (
+          <Chart
+            chartType="LineChart"
+            data={chartData}
+            width="100.00%"
+            height="100vh"
+            options={{
+              title: "Valor totais investidos x Valores acumulados no período",
+              curveType: "function",
+              series: {
+                1: {color: "#00178a"},
+                2: {color: "#6f87ff"}
+              },
+              legend: { position: "bottom" },
+            }}
+          />
+        ) : null}
+
+
+        
+
+        {dividendosPagos[contador] ? (
+          <div className="calculadora-table-card">
+            <table>
+              <thead>
+                <tr> 
+                  <th>Mês</th>
+                  <th>Valor Investido</th>
+                  <th>Rentabilidade</th>
+                  <th>Dividendos Totais</th>
+                  <th>Dividendo do Período</th>
+                  <th>Valor acumulado</th>
+                </tr>
+              </thead>
+              <tbody>
+                {valorAcumulado.map((item, index) => (
+                  <tr key={index}>
+                    <td>{index + 1}</td>
+                    <td>R$ {formatNumber(valorInvestido[index])}</td>
+                    <td>R$ {formatNumber(jurosPagos[index])}</td>
+                    <td>R$ {formatNumber(dividendosPagos[index])}</td>
+                    <td>R$ {formatNumber(ultimoDividendoPago[index])}</td>
+                    <td>R$ {formatNumber(valorAcumulado[index])}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          
+        ) : null}
+    </>
+    
   );
 }
 

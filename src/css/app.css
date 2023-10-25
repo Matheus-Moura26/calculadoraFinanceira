@@ -1,35 +1,72 @@
+#title{
+    text-align: center;
+}
 .calculadora-body{
     display: flex;
-    flex-direction: column;
+}
+    .calculadora-form-card{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 33vw;
+    }
+        .calculadora-form-card-content{
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px;
+        }
+            .calculadora-form-label{
+                width: 100%;
+            }
+            .calculadora-form-input{
+                width: 100%;
+            }
+            .calculadora-form-select{
+                width: 100%;
+
+            }
+                .calculadora-form-options{
+                    width: 100%;
+                }
+            .calculadora-form-label-select{
+                width: 100%;
+            }
+
+.calculadora-form-card-button{
+ width: 100%;   
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+    .calculadora-form-button{
+        width: 100px;
+    }
+
+.calculadora-resumo-card{
+    width: 100%;
+    margin-top: 5vh;
+    display: flex;
     align-items: center;
     justify-content: center;
+    
 }
-    .calculadora-form-label{
-        margin-top: 30px;
-        padding-bottom: 5px;
-    }
-    .calculadora-form-input{
-        width: 15vw;
-    }
-    .calculadora-form-select{
-        margin-bottom: 30px;
-
-    }
-        .calculadora-form-options{
-        }
-    .calculadora-form-label-select{
-        padding-bottom: 5px;
-    }
-    .calculadora-resumo-card{
-        margin-top: 30px;
-        display: flex;
-        
-    }
     .calculadora-resumo-card p{
         padding: 10px 1vw;
     }
 
-    tbody tr td{
-        padding: 0.5vh 1vw;
-        border-bottom: .5px solid black;
-    }
+
+.calculadora-table-card{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 10vh;
+}
+tbody tr td{
+    padding: 0.5vh 1vw;
+    border-bottom: .5px solid black;
+}
