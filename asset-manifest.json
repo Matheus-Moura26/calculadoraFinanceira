@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/calculadoraFinanceira/static/css/main.f26dffd0.css",
-    "main.js": "/calculadoraFinanceira/static/js/main.eb12836f.js",
+    "main.css": "/calculadoraFinanceira/static/css/main.0a83c8c3.css",
+    "main.js": "/calculadoraFinanceira/static/js/main.938d3b76.js",
     "index.html": "/calculadoraFinanceira/index.html",
-    "main.f26dffd0.css.map": "/calculadoraFinanceira/static/css/main.f26dffd0.css.map",
-    "main.eb12836f.js.map": "/calculadoraFinanceira/static/js/main.eb12836f.js.map"
+    "main.0a83c8c3.css.map": "/calculadoraFinanceira/static/css/main.0a83c8c3.css.map",
+    "main.938d3b76.js.map": "/calculadoraFinanceira/static/js/main.938d3b76.js.map"
   },
   "entrypoints": [
-    "static/css/main.f26dffd0.css",
-    "static/js/main.eb12836f.js"
+    "static/css/main.0a83c8c3.css",
+    "static/js/main.938d3b76.js"
   ]
 }
