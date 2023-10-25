@@ -46,16 +46,22 @@ function App() {
     let VI = PV
     //Valor acumulado = present value, servirá para somar como saldo acumulado
     let VA = PV
-    if(D !== 0){
+    if(D !== 0 && D !== null){
       if(REINVESTEDIVIDENDOS === 1){
 
         for (let i = 1; i <= N; i++) {
-          UDP = VA * (D / 100);
-          DVP = DVP + VA * (D / 100);
+          
           VI = VI + PMT;
           JP += VA * (I / 100);
       
-          if (i % PERIODODIVIDENDOS === 0) {
+          if (PERIODODIVIDENDOS === 0) {
+            UDP = 0;
+            DVP = 0;
+            VA = VA * (I / 100) + VA + PMT;
+          }
+          else if (i % PERIODODIVIDENDOS === 0) {
+            UDP = VA * (D / 100);
+            DVP = DVP + VA * (D / 100);
             VA = VA * (I / 100) + VA * (D / 100) + PMT + VA;
           } else {
             VA = VA * (I / 100) + VA + PMT;
@@ -94,12 +100,18 @@ function App() {
       }else{
         console.log("Sem dividendos acumulados")
         for (let i = 1; i <= N; i++) {
-          UDP = VA * (D / 100);
-          DVP = DVP + VA * (D / 100);
           VI = VI + PMT;
           JP += VA * (I / 100);
-          
-          VA = VA * (I / 100) + VA + PMT;
+
+          if (PERIODODIVIDENDOS === 0) {
+            UDP = 0;
+            DVP = 0;
+            VA = VA * (I / 100) + VA + PMT;
+          } else {
+            UDP = VA * (D / 100);
+            DVP = DVP + VA * (D / 100);
+            VA = VA * (I / 100) + VA + PMT;
+          }
           
           
           dividendosPagosArray.push(DVP);
