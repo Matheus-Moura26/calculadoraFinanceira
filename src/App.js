@@ -93,25 +93,28 @@ function App() {
         `);
       }else{
         console.log("Sem dividendos acumulados")
-        for(let i=1; i<= N; i++){
-          JP += VA * (I / 100)
+        for (let i = 1; i <= N; i++) {
+          UDP = VA * (D / 100);
+          DVP = DVP + VA * (D / 100);
           VI = VI + PMT;
-          DVP = DVP + VA*D/100
-          UDP = VA*D/100
-          VA = (VA*I/100)+VA+PMT
-            
+          JP += VA * (I / 100);
+          
+          VA = VA * (I / 100) + VA + PMT;
+          
+          
           dividendosPagosArray.push(DVP);
           ultimoDividendoPagoArray.push(UDP);
           jurosPagosArray.push(JP);
           valorInvestidoArray.push(VI);
           valorAcumuladoArray.push(VA);
-
-          setDividendosPagos(dividendosPagosArray);
-          setUltimoDividendoPago(ultimoDividendoPagoArray);
-          setJurosPagos(jurosPagosArray);
-          setValorInvestido(valorInvestidoArray);
-          setValorAcumulado(valorAcumuladoArray);
-
+        }
+      
+        setDividendosPagos(dividendosPagosArray);
+        setUltimoDividendoPago(ultimoDividendoPagoArray);
+        setJurosPagos(jurosPagosArray);
+        setValorInvestido(valorInvestidoArray);
+        setValorAcumulado(valorAcumuladoArray);
+        
           console.log(`
             dividendos pagos:
             ${dividendosPagos}
@@ -129,7 +132,6 @@ function App() {
             ${valorAcumulado}
 
           `)
-        }
       }
     }else{
       console.log("Sem dividendos")
@@ -143,6 +145,8 @@ function App() {
         valorInvestidoArray.push(VI);
         valorAcumuladoArray.push(VA);
 
+        setUltimoDividendoPago(0)
+        setDividendosPagos(0)
         setJurosPagos(jurosPagosArray);
         setValorInvestido(valorInvestidoArray);
         setValorAcumulado(valorAcumuladoArray);
@@ -273,7 +277,7 @@ function App() {
       </div>
       
 
-        { dividendosPagos[contador]? (
+        { valorAcumulado[contador]? (
           <div className="calculadora-resumo-card">
           <p>Total de dividendos Pagos: R$ {formatNumber(dividendosPagos[contador])}</p>
           <p>Ultimo dividendo pago: R$ {formatNumber(ultimoDividendoPago[contador])}</p>
@@ -283,7 +287,7 @@ function App() {
         </div>) : null}
 
 
-        { dividendosPagos[contador]? (
+        { valorAcumulado[contador]? (
           <Chart
             chartType="LineChart"
             data={chartData}
@@ -304,7 +308,7 @@ function App() {
 
         
 
-        {dividendosPagos[contador] ? (
+        {valorAcumulado[contador] ? (
           <div className="calculadora-table-card">
             <table>
               <thead>
